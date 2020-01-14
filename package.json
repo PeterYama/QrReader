@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "axios": "^0.19.1",
     "bootstrap": "^4.4.1",
     "expo": "~36.0.0",
     "jquery": "^3.4.1",

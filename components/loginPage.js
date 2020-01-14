@@ -7,22 +7,13 @@ import {
   TextInput, 
   Text,Image, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
   import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
-
-  class Cat extends React.Component {
-    render() {
-      const mouse = this.props.mouse;
-      return (
-          <Text>Hello</Text>
-      );
-    }
-  }
- export default function UserLogin() {
+ export default function UserLogin({user}) {
 
     // the user name and password is being updates as the user type
     // grab that data and make a request to the backend
-
-    const [userName, setUserName] = React.useState('Peter');
-    const [userPassword, setUserPassword] = React.useState('123');
+    const axios = require('axios').default;
+    const [userName, setUserName] = React.useState(user.userName);
+    const [userPassword, setUserPassword] = React.useState(user.password);
 
     function Separator() {
         return <View style={styles.separator} />;
@@ -38,6 +29,19 @@ import {
             )
         }else{
             console.log('Permission Denied')
+
+            axios.post('http://10.1.6.106:3000/api/greeter/login', {
+              userName: 'Peter',
+              password: '123'
+            })
+            .then(function (response) {
+              console.log(response);
+              Alert.alert("posted!");
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
         }    
       }
 
@@ -55,12 +59,12 @@ import {
       <Separator/>
       {/* text input */}
       <View>
-        {/* <Text>
+        <Text>
           Current UserName:{userName}
         </Text>
         <Text>
           Current UserPassword:{userPassword}
-        </Text> */}
+        </Text>
         <TextInput
             style={{ height: 40,marginHorizontal:50, borderColor: 'gray', borderWidth: 1 }}
             onChangeText={(val) => setUserName(val)}
