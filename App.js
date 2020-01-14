@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import UserLogin from './components/loginPage'
+import Navigator from './routes/homeStack'
   
 export default class App extends Component{
   state = {
@@ -10,8 +11,10 @@ export default class App extends Component{
   }
   render(){
     return (
-      <UserLogin user={this.state.accounts}/>
+      <Navigator />
     );
   }
 }
-
+   
+{/* <UserLogin user={this.state.accounts}/> */}
+ 

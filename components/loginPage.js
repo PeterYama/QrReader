@@ -7,13 +7,13 @@ import {
   TextInput, 
   Text,Image, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
   import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
- export default function UserLogin({user}) {
+ export default function UserLogin( { navigation } ) {
 
     // the user name and password is being updates as the user type
     // grab that data and make a request to the backend
     const axios = require('axios').default;
-    const [userName, setUserName] = React.useState(user.userName);
-    const [userPassword, setUserPassword] = React.useState(user.password);
+    const [userName, setUserName] = React.useState("user.userName");
+    const [userPassword, setUserPassword] = React.useState("user.password");
 
     function Separator() {
         return <View style={styles.separator} />;
@@ -29,6 +29,9 @@ import {
             )
         }else{
             console.log('Permission Denied')
+            console.log(navigation.navigate('cameraView'))
+            console.log(navigation.navigate('cameraView'))
+
 
             axios.post('http://10.1.6.106:3000/api/greeter/login', {
               userName: 'Peter',
@@ -37,6 +40,7 @@ import {
             .then(function (response) {
               console.log(response);
               Alert.alert("posted!");
+
             })
             .catch(function (error) {
               console.log(error);
@@ -94,10 +98,7 @@ import {
         <FontAwesome name="facebook-official" size={42} color="#3b5998" onPress={() => console.log('facebook Clicked')}/>
         <MaterialCommunityIcons name="gmail" size={42} color="#4285F4" onPress={() => console.log('Gmail Clicked')}/>
         </View>
-       
-
-    </SafeAreaView>
-    
+      </SafeAreaView> 
     </TouchableWithoutFeedback>
     )
   }
