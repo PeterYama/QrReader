@@ -1,19 +1,36 @@
 import React from 'react';
-import { 
-  Alert, 
-  SafeAreaView, 
-  Button, 
-  StyleSheet,
-  TextInput, 
-  Text,Image, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
-  import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import { Alert, SafeAreaView, Button, StyleSheet, TextInput, Text,Image, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+
  export default function UserLogin( { navigation } ) {
 
     // the user name and password is being updates as the user type
     // grab that data and make a request to the backend
-    const axios = require('axios').default;
+    
     const [userName, setUserName] = React.useState("user.userName");
     const [userPassword, setUserPassword] = React.useState("user.password");
+
+    function httpRequest(){
+      console.log("inside httpRequest")
+
+      fetch('http://10.1.6.236:3000/api/userValidation/validate', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userName:'peter',
+        password:'123'
+      })
+    }).then(res => res.json())
+      .then(
+        (result) => {
+          console.log("result: "+ JSON.stringify(result))
+            result.valid ? navigation.navigate('cameraView') : navigation.navigate('errorPage')
+        },
+        (error) => {
+          console.log(`Error while calling the API : ${error}`)
+        }
+      );
+    }
 
     function Separator() {
         return <View style={styles.separator} />;
@@ -28,24 +45,8 @@ import {
                 <Text>Hello</Text>
             )
         }else{
-            console.log('Permission Denied')
-            console.log(navigation.navigate('cameraView'))
-            console.log(navigation.navigate('cameraView'))
-
-
-            axios.post('http://10.1.6.106:3000/api/greeter/login', {
-              userName: 'Peter',
-              password: '123'
-            })
-            .then(function (response) {
-              console.log(response);
-              Alert.alert("posted!");
-
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-
+            console.log('ignoring user login for testing:')
+            navigation.navigate('cameraView');
         }    
       }
 
@@ -96,7 +97,7 @@ import {
         </View>
         <View style={{flexDirection:'row',justifyContent: 'space-around',marginTop:30, marginHorizontal:40}}>
         <FontAwesome name="facebook-official" size={42} color="#3b5998" onPress={() => console.log('facebook Clicked')}/>
-        <MaterialCommunityIcons name="gmail" size={42} color="#4285F4" onPress={() => console.log('Gmail Clicked')}/>
+        <MaterialCommunityIcons name="gmail" size={42} color="#4285F4" onPress={() => httpRequest()}/>
         </View>
       </SafeAreaView> 
     </TouchableWithoutFeedback>

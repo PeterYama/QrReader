@@ -5,13 +5,15 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "debug": "expo start"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.5",
     "axios": "^0.19.1",
     "bootstrap": "^4.4.1",
     "expo": "~36.0.0",
+    "expo-barcode-scanner": "~8.0.0",
     "expo-camera": "^8.0.0",
     "jquery": "^3.4.1",
     "react": "~16.9.0",
@@ -23,8 +25,7 @@
     "react-native-safe-area-context": "0.6.0",
     "react-native-web": "~0.11.7",
     "react-navigation": "git+https://github.com/react-community/react-navigation.git",
-    "react-navigation-stack": "^2.0.15",
-    "expo-barcode-scanner": "~8.0.0"
+    "react-navigation-stack": "^2.0.15"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.0.0",
