@@ -1,34 +1,50 @@
-import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { Text, View, Alert } from 'react-native';
 
-export default function productList(props) {
-    const { navigation } = props;
-    const [products,setProducts] = useState('');
-    var data = navigation.getParam('data');
-    
-    function populate(data){
+export default class productList extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.test()
+        // const [products,setProducts] = useState('');
+        // this.setProducts = this.setProducts.bind(this);
+    }
+
+    test(){
+        Alert.alert('test')
+    }
+
+    populateState(data) {
         fetch(data).then(res => res.json())
         .then(
           (result) => {
-            // console.log("result: "+ JSON.stringify(result))
-            setProducts(result);
-            console.log(products);
+            console.log("result: "+ JSON.stringify(result))
+
           },
           (error) => {
             console.log(`Error while calling the API : ${error}`)
           }
-    );  
-    }
-    
-    populate(data);
-    
+        );
+      }
+  
+//   state = {
+//     hasCameraPermission: null,
+//     scanned: false,
+//   }; 
+
+  render() {
+    // const { navigation } = this.props;
+
     return (
       <View>
        <Text>Product List</Text>
-       <Text>data = {JSON.stringify(navigation.getParam('data'))}</Text>
+       {/* <Text>data = {JSON.stringify(navigation.getParam('data'))}</Text>
        <Text>type = {JSON.stringify(navigation.getParam('type'))}</Text>
-       <Text>{JSON.stringify(products)}</Text>
+       <Text>type = {this.userState.products}</Text> */}
       </View>
       
     );
+  }
+
+  
 }
