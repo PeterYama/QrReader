@@ -6,16 +6,16 @@ import errorPage from '../components/errorPage';
 import productList from '../components/productList';
 
 const screens = {
-    loginPage: {
+    "Login Page": {
         screen: loginPage
     },
-    cameraView:{
+    "Camera View":{
         screen: cameraView
     },
-    errorPage:{
+    "Error Page":{
         screen: errorPage
     },
-    productList:{
+    "Product List":{
         screen:productList
     }
 }
