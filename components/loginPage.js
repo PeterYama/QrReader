@@ -6,7 +6,9 @@ import Login from '../controllers/facebook';
 
 
 export default function UserLogin({ navigation }) {
-
+    var cloudUrl = 'https://shumazhi.appspot.com/api/userValidation/validate';
+    var localUrl = 'http://10.1.5.75:3000/api/userValidation/validate'
+    
   // the user name and password is being updates as the user type
   // grab that data and make a request to the backend
   const [email, setEmail] = React.useState("user.email");
@@ -22,11 +24,10 @@ export default function UserLogin({ navigation }) {
   };
 
   function loginButtonHandler() {
-    var cloudUrl = 'https://shumazhi.appspot.com/api/userValidation/validate';
-    var localUrl = 'http://10.1.5.75:3000/api/userValidation/validate'
+
     console.log("inside loginButtonHandler")
 
-    fetch(localUrl, {
+    fetch(cloudUrl, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -36,8 +37,8 @@ export default function UserLogin({ navigation }) {
     }).then(res => res.json())
       .then(
         (result) => {
-          console.log(result.Account)
-          if (result.Account === false){
+          console.log(result)
+          if (result.Account === 'false'){
             Alert.alert("Password is Wrong or user does not exist")
           }else{
             navigation.navigate('Camera View')

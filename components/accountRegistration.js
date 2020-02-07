@@ -1,11 +1,10 @@
 import React from 'react';
 import { Alert, SafeAreaView, Button, ImageBackground, TextInput, Text, Image, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import styles from '../components/styles';
+var cloudUrl = 'https://shumazhi.appspot.com/api/userValidation/CreateUser';
 
 
 export default function createAccount({ navigation }) {
-
-    var localUrl = 'http://10.1.5.75:3000/api/userValidation/CreateUser'
 
     const [userName, setUserName] = React.useState('');
     const [userPass, setUserPass] = React.useState('');
@@ -29,7 +28,7 @@ export default function createAccount({ navigation }) {
 
             console.log(userObj)
             
-        fetch(localUrl, {
+        fetch(cloudUrl, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -39,6 +38,8 @@ export default function createAccount({ navigation }) {
             .then((response,err) => response.json())
             .then((responseJson) => {
                 console.log("Success" + JSON.stringify(responseJson))
+                navigation.navigate('Login Page')
+
             })
             .catch((err) => {
                 console.error("err"+err);
@@ -60,10 +61,6 @@ export default function createAccount({ navigation }) {
                 <SafeAreaView style={styles.LoginContainer}>
                     <Separator />
                     <View>
-                        <Text>{userName}</Text>
-                        <Text>{userEmail}</Text>
-                        <Text>{userPass}</Text>
-                        <Text>{userSecondPass}</Text>
                         <TextInput
                             style={styles.TextStyle}
                             onChangeText={(val) => setUserName(val)}
