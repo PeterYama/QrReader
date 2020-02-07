@@ -4,6 +4,9 @@ import loginPage from '../components/loginPage';
 import cameraView from '../components/cameraView';
 import errorPage from '../components/errorPage';
 import productList from '../components/productList';
+import AuthScreen from '../controllers/googleLogin';
+import Login from '../controllers/facebook';
+import createAccount from '../components/accountRegistration';
 
 const screens = {
     "Login Page": {
@@ -17,6 +20,15 @@ const screens = {
     },
     "Product List":{
         screen:productList
+    },
+    "AuthScreen":{
+        screen:AuthScreen
+    },
+    "Login":{
+        screen:Login
+    },
+    "Create Account":{
+        screen:createAccount
     }
 }
 const HomeStack = createStackNavigator(screens,{headerMode:false});

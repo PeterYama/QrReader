@@ -53,7 +53,7 @@ export default function productList(props) {
               </View>
               <Button
               buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-              title='Scan Another Product' onPress={console.log("Buttom Pressed")}/>
+              title='Scan Another Product' onPress={()=>navigation.navigate('Camera View')}/>
       </Card>
     </ScrollView>
   ) : <View><Text>Error</Text></View>

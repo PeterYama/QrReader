@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
+import logo from '../assets/gifs/giphy.webp'
 
 export default class errorPage extends React.Component {
   state = {
@@ -7,15 +8,16 @@ export default class errorPage extends React.Component {
     scanned: false,
   };
 
-  
+
 
   render() {
     return (
       <View>
-       <Text>Error</Text>
+        <Text>Error</Text>
+        <img src={logo} alt="loading..." />
       </View>
     );
   }
 
-  
+
 }

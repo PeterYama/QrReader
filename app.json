@@ -9,6 +9,11 @@
       "android",
       "web"
     ],
+    "android": {
+      "package": "com.ait.qrreader",
+      "versionCode": 1,
+      "googleServicesFile": "./../QrReader/google-services.json"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

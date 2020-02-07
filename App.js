@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import UserLogin from './components/loginPage'
 import Navigator from './routes/homeStack'
   
 export default class App extends Component{
@@ -16,5 +15,4 @@ export default class App extends Component{
   }
 }
    
-{/* <UserLogin user={this.state.accounts}/> */}
  

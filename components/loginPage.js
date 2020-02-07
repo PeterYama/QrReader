@@ -1,102 +1,103 @@
 import React from 'react';
-import { Alert, SafeAreaView, Button, ImageBackground, TextInput, Text,Image, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Alert, SafeAreaView, Button, ImageBackground, TextInput, Text, Image, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 import styles from '../components/styles';
+import Login from '../controllers/facebook';
 
- export default function UserLogin( { navigation } ) {
 
-    // the user name and password is being updates as the user type
-    // grab that data and make a request to the backend
-    
-    const [userName, setUserName] = React.useState("user.userName");
-    const [userPassword, setUserPassword] = React.useState("user.password");
+export default function UserLogin({ navigation }) {
 
-    function httpRequest(){
-      console.log("inside httpRequest")
+  // the user name and password is being updates as the user type
+  // grab that data and make a request to the backend
+  const [email, setEmail] = React.useState("user.email");
+  const [userPassword, setUserPassword] = React.useState("user.password");
 
-      fetch('http://10.1.5.15:3000/api/userValidation/validate', {
+  googleLogin = async () => {
+    try {
+      await GoogleSignIn.initAsync({ clientId: '305524967998-rauc6p3np4k2kaluojpovprt37b7ausm.apps.googleusercontent.com' });
+    } catch ({ message }) {
+      alert('GoogleSignIn.initAsync(): ' + message);
+    }
+    console.log(AppAuth)
+  };
+
+  function loginButtonHandler() {
+    var cloudUrl = 'https://shumazhi.appspot.com/api/userValidation/validate';
+    var localUrl = 'http://10.1.5.75:3000/api/userValidation/validate'
+    console.log("inside loginButtonHandler")
+
+    fetch(localUrl, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        userName:'peter',
-        password:'123'
+        email: email,
+        password: userPassword
       })
     }).then(res => res.json())
       .then(
         (result) => {
-          console.log("result: "+ JSON.stringify(result))
-            result.valid ? navigation.navigate('Camera View') : navigation.navigate('errorPage')
+          console.log("result: " + JSON.stringify(result))
+          navigation.navigate('Camera View')
         },
         (error) => {
           console.log(`Error while calling the API : ${error}`)
         }
       );
-    }
+  }
 
-    function Separator() {
-        return <View style={styles.separator} />;
-      }
+  function Separator() {
+    return <View style={styles.separator} />;
+  }
 
-    function createAccountHandler(){
-        Alert.alert('Create Account Clicked')
-    }
-    
-    function loginButtonHandler(){
-      if(userName==='user' & userPassword==='user'){
-          navigation.navigate('Camera View');
-      }else{
-          console.log("user name or password are incorrect")
-           navigation.navigate('Error Page');
-      }    
-    }
+  function createAccountHandler() {
+    navigation.navigate('Create Account');
+  }
 
-    return (
-  <ImageBackground source={require('../pictures/Background4.jpg')} style={{width: '100%', height: '100%',position:"relative"}}>
-    <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
+  return (
+    <ImageBackground source={require('../pictures/Background4.jpg')} style={{ width: '100%', height: '100%', position: "relative" }}>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <SafeAreaView style={styles.LoginContainer}>
-        <Separator/>
-       
-              <Text style={styles.logo}>Shumazhi</Text>
+          <Separator />
 
-            <View>
-              
+          <Text style={styles.logo}>Shumazhi</Text>
+
+          <View>
+
             <TextInput
-                  style={{ height: 40,marginHorizontal:50, borderColor: 'gray', borderBottomWidth: 1 }}
-                  onChangeText={(val) => setUserName(val)}
-                  placeholder={"User Name"}
+              style={{ height: 40, marginHorizontal: 50, borderColor: 'gray', borderBottomWidth: 1 }}
+              onChangeText={(val) => setEmail(val)}
+              placeholder={"Email"}
 
-                />
-                <TextInput
-              style={{ height: 40,marginHorizontal:50, borderColor: 'gray', borderBottomWidth: 1,marginTop:15 }}
+            />
+            <TextInput
+              style={{ height: 40, marginHorizontal: 50, borderColor: 'gray', borderBottomWidth: 1, marginTop: 15 }}
               onChangeText={(val) => setUserPassword(val)}
               placeholder={"Password"}
             />
           </View>
 
           <View style={styles.horizontal}>
-              <Button
-                title="Login"
-                onPress={() => loginButtonHandler()}
-                color={'#4e5eca'}
-              />
-              <View style={styles.smallSeparator}></View>
+            <Button
+              title="Login"
+              onPress={() => loginButtonHandler()}
+              color={'#4e5eca'}
+            />
+            <View style={styles.smallSeparator}></View>
 
-              <Button
-                title="Create Account"
-                onPress={() => createAccountHandler()}
-                color={'#24267c'}
-              />
-             
+            <Button
+              title="Create Account"
+              onPress={() => createAccountHandler()}
+              color={'#24267c'}
+            />
+
           </View>
-
-            <View style={{flexDirection:'row',justifyContent: 'space-around', paddingBottom:30}}>
-              <FontAwesome name="facebook-official" size={42} color="#ffffff" onPress={() => console.log('facebook Clicked')}/>
-              <MaterialCommunityIcons name="gmail" size={42} color="#ffffff" onPress={() => httpRequest()}/>
-            </View>
-         </SafeAreaView>     
-    </TouchableWithoutFeedback>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 30 }}>
+            <FontAwesome name="facebook-official" size={42} color="#ffffff" onPress={() => Login()} />
+            <MaterialCommunityIcons name="gmail" size={42} color="#ffffff" onPress={() => googleLogin()} />
+          </View>
+        </SafeAreaView>
+      </TouchableWithoutFeedback>
     </ImageBackground>
-    )
-  }
+  )
+}
 
-  

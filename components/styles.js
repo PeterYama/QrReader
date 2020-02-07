@@ -53,6 +53,13 @@ const styles = StyleSheet.create({
     },
     smallSeparator:{
       padding:10,
+    },
+    TextStyle:{
+      height: 40,
+      marginHorizontal: 50, 
+      borderColor: 'gray', 
+      borderBottomWidth: 1, 
+      marginTop: 15
     }
   })
 
