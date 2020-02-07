@@ -36,8 +36,12 @@ export default function UserLogin({ navigation }) {
     }).then(res => res.json())
       .then(
         (result) => {
-          console.log("result: " + JSON.stringify(result))
-          navigation.navigate('Camera View')
+          console.log(result.Account)
+          if (result.Account === false){
+            Alert.alert("Password is Wrong or user does not exist")
+          }else{
+            navigation.navigate('Camera View')
+          }
         },
         (error) => {
           console.log(`Error while calling the API : ${error}`)
