@@ -12,25 +12,25 @@ const screens = {
     "Login Page": {
         screen: loginPage
     },
-    "Camera View":{
+    "Camera View": {
         screen: cameraView
     },
-    "Error Page":{
+    "Error Page": {
         screen: errorPage
     },
-    "Product List":{
-        screen:productList
+    "Product List": {
+        screen: productList
     },
-    "AuthScreen":{
-        screen:AuthScreen
+    "AuthScreen": {
+        screen: AuthScreen
     },
-    "Login":{
-        screen:Login
+    "Login": {
+        screen: Login
     },
-    "Create Account":{
-        screen:createAccount
+    "Create Account": {
+        screen: createAccount
     }
 }
-const HomeStack = createStackNavigator(screens,{headerMode:false});
+const HomeStack = createStackNavigator(screens, { headerMode: false });
 
 export default createAppContainer(HomeStack);

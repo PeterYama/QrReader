@@ -14,7 +14,11 @@ export default class errorPage extends React.Component {
     return (
       <View>
         <Text>Error</Text>
-        <img src={logo} alt="loading..." />
+          <img 
+          src={logo} 
+          alt="loading..."
+          style={"width:150; height:150"} 
+           />
       </View>
     );
   }

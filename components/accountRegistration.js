@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, SafeAreaView, Button, ImageBackground, TextInput, Text, Image, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Alert, SafeAreaView, Button, ImageBackground, TextInput, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import styles from '../components/styles';
 var cloudUrl = 'https://shumazhi.appspot.com/api/userValidation/CreateUser';
 
@@ -27,31 +27,32 @@ export default function createAccount({ navigation }) {
             }
 
             console.log(userObj)
-            
-        fetch(cloudUrl, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userObj)}) 
-            .then((response,err) => response.json())
-            .then((responseJson) => {
-                console.log("Success" + JSON.stringify(responseJson))
-                navigation.navigate('Login Page')
 
+            fetch(cloudUrl, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userObj)
             })
-            .catch((err) => {
-                console.error("err"+err);
-            });
-           
+                .then((response, err) => response.json())
+                .then((responseJson) => {
+                    console.log("Success" + JSON.stringify(responseJson))
+                    navigation.navigate('Login Page')
+
+                })
+                .catch((err) => {
+                    console.error("err" + err);
+                });
+
         }
 
-        if(userName !== ''){
+        if (userName !== '') {
             userPass === userSecondPass ? request() : Alert.alert('second Password incorrect')
-        }else{
+        } else {
             Alert.alert("something went wrong, please review the form")
-        }      
+        }
 
     }
 
